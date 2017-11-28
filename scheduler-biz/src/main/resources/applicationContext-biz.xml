@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+      >
+      
+    <import resource="classpath*:/applicationContext-resource-runtime.xml" /> 
+    
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+    
+    <!-- Activates scanning of @Service -->
+    <context:component-scan base-package="com.huifu.scheduler.biz"/>
+    
+   <bean parent="saturnMessageListenerContainer">
+   	<property name="destinationName" value="TP_SC_SCHEDULER"/>
+   	 <property name="messageListener" >
+    	 <bean  class="com.huifu.scheduler.biz.SchedulerMessageListener"/>
+    </property>
+   </bean>
+    
+    
+    <bean name="schedulerInitFactory"
+		class="com.huifu.scheduler.biz.SchedulerInitFactory"
+		init-method="init" >
+	</bean>
+	<!--
+    <bean id="messsageContainsers2" parent="saturnPubSubMessageListenerContainer">
+   	<property name="destinationName" value="TP_PUB_SUB_SC_cif_test"/>
+    <property name="messageListener" >
+     <bean  class="com.huifu.scheduler.ExampleListener"/>
+    </property>
+   </bean>
+    <bean parent="saturnMessageListenerContainer">
+   	<property name="destinationName" value="TP_SC_cif_test"/>
+   	 <property name="messageListener" >
+    	 <bean  class="com.huifu.scheduler.ExampleListener"/>
+    </property>
+   </bean>-->
+</beans>

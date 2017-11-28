@@ -1,0 +1,19 @@
+<decorators defaultdir="/decorators">
+    <excludes>
+         <pattern>/ajax*</pattern>
+         <pattern>/images/**</pattern>
+         <pattern>/scripts/**</pattern>
+         <pattern>/styles/**</pattern>
+    </excludes><!--
+   
+    <decorator name="biza" page="biza.ftl">
+        <pattern>/biza/*</pattern>
+    </decorator>
+    <decorator name="bizb" page="bizb.ftl">
+        <pattern>/bizb/*</pattern>
+    </decorator>
+     --><decorator name="default" page="default.ftl">
+        <pattern>/*</pattern>
+    </decorator>
+    
+</decorators>
